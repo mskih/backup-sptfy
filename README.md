@@ -45,7 +45,7 @@ Stack:
 - Docker + Debian bookworm (Python 3.11)
 ```
 
-### Web UI
+### 🎧 Web UI
 
 <img width="1864" height="1041" alt="Screenshot_2025-11-15_05-29-25" src="https://github.com/user-attachments/assets/5c4cd0dd-7872-4c8b-8721-9e96755d1dbd" />
 
