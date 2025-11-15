@@ -43,6 +43,7 @@ Stack:
 - spotdl (Python)
 - ffmpeg
 - Docker + Debian bookworm (Python 3.11)
+```
 
 ### Web UI
 
