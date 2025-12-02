@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %> · Backup Sptfy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/css/main.css" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+  <div class="navbar-left">
+    <a class="navbar-brand" href="/">
+      <div class="logo-circle">♪</div>
+      <span class="app-title">Backup Sptfy</span>
+    </a>
+  </div>
+  <nav class="navbar-nav">
+    <a href="/" class="nav-link <%= active === 'home' ? 'nav-link-active' : '' %>">Playlists</a>
+    <a href="/playlists/add" class="nav-link <%= active === 'add' ? 'nav-link-active' : '' %>">Add playlist</a>
+    <a href="/yt" class="nav-link <%= active === 'yt' ? 'nav-link-active' : '' %>">YouTube → MP3</a>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="section">
+    <h1 class="section-title">YouTube → MP3</h1>
+    <p class="muted">Paste a YouTube URL. We’ll save an MP3 with embedded tags and thumbnail.</p>
+
+    <form method="POST" action="/yt" class="yt-form">
+      <input type="url" name="url" required placeholder="https://www.youtube.com/watch?v=..." class="yt-input" />
+      <button class="btn btn-primary" type="submit">Download MP3</button>
+      <a href="/" class="btn btn-secondary">Back to playlists</a>
+    </form>
+
+    <% if (job) { %>
+      <div class="summary-card" style="margin-top:1rem;">
+        <div class="summary-row">
+          <div>
+            <div class="summary-value"><%= job.status %></div>
+            <div class="summary-label">Status</div>
+          </div>
+          <div>
+            <div class="summary-value"><%= job.id %></div>
+            <div class="summary-label">Job ID</div>
+          </div>
+          <div>
+            <div class="summary-value">
+              <a class="external-link" href="<%= job.url %>" target="_blank" rel="noopener">Open video</a>
+            </div>
+            <div class="summary-label">Source</div>
+          </div>
+        </div>
+
+        <% if (job.files && job.files.length) { %>
+          <h2 class="section-subtitle">Result</h2>
+          <ul class="yt-file-list">
+            <% job.files.forEach(f => { %>
+              <li>
+                <a class="btn btn-primary yt-download-btn" href="<%= f.href %>">
+                  ⬇ Download MP3
+                </a>
+                <span class="muted yt-file-name"><%= f.name %></span>
+              </li>
+            <% }) %>
+          </ul>
+        <% } %>
+
+        <% if (job.logs && job.logs.length) { %>
+          <h2 class="section-subtitle">Log</h2>
+          <div class="log-box"><pre><%= job.logs.join('\n') %></pre></div>
+        <% } %>
+
+        <% if (job.error) { %>
+          <p class="error-text" style="margin-top:.6rem;">Error: <%= job.error %></p>
+        <% } %>
+      </div>
+    <% } %>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Self-hosted Spotify playlist backup · spotdl + yt-dlp</span>
+</footer>
+</body>
+</html>

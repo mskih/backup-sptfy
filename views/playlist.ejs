@@ -14,9 +14,11 @@
       <span class="app-title">Backup Sptfy</span>
     </a>
   </div>
-  <div class="navbar-right">
-    <span class="badge">Node · Express</span>
-  </div>
+  <nav class="navbar-nav">
+    <a href="/" class="nav-link <%= active === 'home' ? 'nav-link-active' : '' %>">Playlists</a>
+    <a href="/playlists/add" class="nav-link <%= active === 'add' ? 'nav-link-active' : '' %>">Add playlist</a>
+    <a href="/yt" class="nav-link <%= active === 'yt' ? 'nav-link-active' : '' %>">YouTube → MP3</a>
+  </nav>
 </header>
 
 <main class="page">
@@ -41,6 +43,9 @@
           <p class="muted">
             by <strong><%= playlist.owner || 'Unknown' %></strong> ·
             <%= playlist.tracksTotal || playlist.tracks.length %> tracks
+            <% if (playlist.isManual) { %>
+              · <span class="badge badge-ok" style="font-size:0.7rem;">manual</span>
+            <% } %>
           </p>
           <% if (playlist.url) { %>
             <p>

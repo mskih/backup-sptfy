@@ -14,9 +14,11 @@
       <span class="app-title">Backup Sptfy</span>
     </a>
   </div>
-  <div class="navbar-right">
-    <span class="badge">Node · Express</span>
-  </div>
+  <nav class="navbar-nav">
+    <a href="/" class="nav-link <%= active === 'home' ? 'nav-link-active' : '' %>">Playlists</a>
+    <a href="/playlists/add" class="nav-link <%= active === 'add' ? 'nav-link-active' : '' %>">Add playlist</a>
+    <a href="/yt" class="nav-link <%= active === 'yt' ? 'nav-link-active' : '' %>">YouTube → MP3</a>
+  </nav>
 </header>
 
 <main class="page">
@@ -25,7 +27,8 @@
 
     <% if (!playlists || !playlists.length) { %>
       <p class="muted">
-        No playlists configured. Set <code>PLAYLIST_URLS</code> in your <code>.env</code> file.
+        No playlists configured. Set <code>PLAYLIST_URLS</code> in your <code>.env</code> file
+        or <a href="/playlists/add">add a playlist manually</a>.
       </p>
     <% } else { %>
       <div class="playlist-grid">
@@ -48,7 +51,12 @@
               <h2 class="playlist-name">
                 <a href="/playlist/<%= p.id %>"><%= p.name %></a>
               </h2>
-              <p class="playlist-owner">by <%= p.owner || 'Unknown' %></p>
+              <p class="playlist-owner">
+                by <%= p.owner || 'Unknown' %>
+                <% if (p.isManual) { %>
+                  <span class="badge badge-ok" style="margin-left:4px;font-size:0.65rem;">manual</span>
+                <% } %>
+              </p>
             </div>
 
             <div class="playlist-meta">

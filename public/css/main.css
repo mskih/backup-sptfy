@@ -53,8 +53,7 @@ a:hover {
   backdrop-filter: blur(12px);
 }
 
-.navbar-left,
-.navbar-right {
+.navbar-left {
   display: flex;
   align-items: center;
 }
@@ -68,6 +67,26 @@ a:hover {
 .navbar-brand:hover {
   text-decoration: none;
   opacity: 0.9;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+.nav-link:hover {
+  color: #fff;
+}
+.nav-link-active {
+  color: #fff;
+  border-bottom-color: var(--accent);
 }
 
 .logo-circle {
@@ -455,6 +474,47 @@ a:hover {
   white-space: pre-wrap;
 }
 
+/* Forms (used by Add playlist + /yt page) */
+
+.yt-form {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0.6rem 0 0.2rem;
+}
+
+.yt-input {
+  flex: 1;
+  background: #1e1e1e;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+  color: var(--text);
+  outline: none;
+}
+.yt-input:focus {
+  border-color: var(--accent);
+}
+
+.yt-file-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.3rem 0 0;
+}
+.yt-file-list li {
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* green download button & filename label */
+.yt-download-btn {
+  text-decoration: none;
+}
+.yt-file-name {
+  font-size: 0.75rem;
+}
+
 /* Footer */
 
 .footer {
@@ -490,5 +550,14 @@ a:hover {
 
   .summary-row {
     flex-direction: column;
+  }
+
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .navbar-nav {
+    gap: 0.6rem;
+    font-size: 0.8rem;
   }
 }

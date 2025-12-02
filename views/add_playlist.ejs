@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %> · Backup Sptfy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/css/main.css" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+  <div class="navbar-left">
+    <a class="navbar-brand" href="/">
+      <div class="logo-circle">♪</div>
+      <span class="app-title">Backup Sptfy</span>
+    </a>
+  </div>
+  <nav class="navbar-nav">
+    <a href="/" class="nav-link <%= active === 'home' ? 'nav-link-active' : '' %>">Playlists</a>
+    <a href="/playlists/add" class="nav-link <%= active === 'add' ? 'nav-link-active' : '' %>">Add playlist</a>
+    <a href="/yt" class="nav-link <%= active === 'yt' ? 'nav-link-active' : '' %>">YouTube → MP3</a>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="section">
+    <h1 class="section-title">Add a Spotify playlist</h1>
+    <p class="muted">
+      Paste a Spotify playlist URL. It will be added for this session so you can sync and download it,
+      without modifying your <code>.env</code>.
+    </p>
+
+    <% if (error) { %>
+      <p class="error-text"><%= error %></p>
+    <% } %>
+
+    <form method="POST" action="/playlists/add" class="yt-form">
+      <input
+        type="url"
+        name="url"
+        required
+        placeholder="https://open.spotify.com/playlist/..."
+        class="yt-input"
+        value="<%= url || '' %>"
+      />
+      <button class="btn btn-primary" type="submit">Add playlist</button>
+      <a href="/" class="btn btn-secondary">Back to playlists</a>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Temporary playlists are stored in memory only · restart clears them</span>
+</footer>
+</body>
+</html>
